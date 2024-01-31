@@ -26,23 +26,25 @@
             <!-- Add more blue objects as needed -->
         </a-marker>
 
-        <!-- Location-based approach: Red Objects in fixed positions -->
-        <!-- Red Box -->
-        <a-entity position="1 0 -3">
-            <a-box color="red"></a-box>
-        </a-entity>
+        <!-- Location-based approach: Red Objects close to the user's GPS location -->
+        <a-entity gps-entity-place="latitude: 0; longitude: 0;">
+            <!-- Red Box -->
+            <a-entity position="1 0 -3">
+                <a-box color="red"></a-box>
+            </a-entity>
 
-        <!-- Red Sphere -->
-        <a-entity position="-2 0 -2">
-            <a-sphere color="red"></a-sphere>
-        </a-entity>
+            <!-- Red Sphere -->
+            <a-entity position="-2 0 -2">
+                <a-sphere color="red"></a-sphere>
+            </a-entity>
 
-        <!-- Red Cylinder -->
-        <a-entity position="0 -2 -4">
-            <a-cylinder color="red"></a-cylinder>
-        </a-entity>
+            <!-- Red Cylinder -->
+            <a-entity position="0 -2 -4">
+                <a-cylinder color="red"></a-cylinder>
+            </a-entity>
 
-        <!-- Add more red objects as needed -->
+            <!-- Add more red objects as needed -->
+        </a-entity>
 
         <a-entity gps-camera rotation-reader></a-entity>
     </a-scene>
