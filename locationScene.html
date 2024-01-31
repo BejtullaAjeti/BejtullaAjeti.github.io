@@ -10,18 +10,22 @@
 <body>
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
         <a-entity id="userLocation"></a-entity>
-        <!-- Red Sphere around the user -->
+
+        <!-- Red Sphere stays in initial position -->
         <a-entity scale="0.3 0.3 0.3" position="1 0 -3">
             <a-sphere color="red"></a-sphere>
         </a-entity>
-        <!-- Red Cube around the user -->
+
+        <!-- Red Cube stays in initial position -->
         <a-entity scale="0.3 0.3 0.3" position="-2 0 -2">
             <a-box color="red"></a-box>
         </a-entity>
-        <!-- Red Cylinder around the user -->
+
+        <!-- Red Cylinder stays in initial position -->
         <a-entity scale="0.3 0.3 0.3" position="0 -2 -4">
             <a-cylinder color="red"></a-cylinder>
         </a-entity>
+
         <a-entity gps-camera rotation-reader></a-entity>
 
         <script>
