@@ -6,28 +6,21 @@
     <title>AR.js with A-Frame Lab</title>
 </head>
 <body>
-    <!-- UI Element for Scene Switching -->
     <div style="position: fixed; top: 10px; right: 10px; z-index: 999;">
         <button onclick="loadMarkerScene()">Marker Scene</button>
         <button onclick="loadLocationScene()">Location Scene</button>
     </div>
 
-    <!-- Container to load scenes dynamically -->
     <div id="arSceneContainer"></div>
 
     <script>
-        // Function to load the marker-based scene
         function loadMarkerScene() {
             loadScene("markerScene.html");
         }
 
-        // Function to load the location-based scene
         function loadLocationScene() {
             loadScene("locationScene.html");
         }
-
-        // Function to load scenes dynamically
-        <!-- Function to load scenes dynamically -->
         function loadScene(sceneFile) {
             const container = document.getElementById("arSceneContainer");
             container.innerHTML = ""; // Clear previous scene

@@ -11,17 +11,14 @@
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
         <a-entity id="userLocation"></a-entity>
 
-        <!-- Red Sphere stays in initial position -->
         <a-entity scale="0.3 0.3 0.3" position="1 0 -3">
             <a-sphere color="red"></a-sphere>
         </a-entity>
 
-        <!-- Red Cube stays in initial position -->
         <a-entity scale="0.3 0.3 0.3" position="-2 0 -2">
             <a-box color="red"></a-box>
         </a-entity>
 
-        <!-- Red Cylinder stays in initial position -->
         <a-entity scale="0.3 0.3 0.3" position="0 -2 -4">
             <a-cylinder color="red"></a-cylinder>
         </a-entity>
@@ -29,11 +26,9 @@
         <a-entity gps-camera rotation-reader></a-entity>
 
         <script>
-            // Get the user's location
             navigator.geolocation.getCurrentPosition(function (position) {
                 const userLatitude = position.coords.latitude;
                 const userLongitude = position.coords.longitude;
-                // Update the user's location for the red objects
                 document.querySelector("#userLocation").setAttribute("gps-entity-place", `latitude: ${userLatitude}; longitude: ${userLongitude};`);
             });
         </script>
