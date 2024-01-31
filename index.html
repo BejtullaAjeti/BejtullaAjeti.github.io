@@ -21,28 +21,9 @@
                         latitude: latitudeWithOffset,
                         longitude: longitudeWithOffset
                     });
-
-                    // Initialize the A-Frame scene after obtaining GPS coordinates
-                    initializeARScene();
                 });
             } else {
                 console.error("Geolocation is not supported on this device.");
-            }
-
-            function initializeARScene() {
-                // Initialize A-Frame scene
-                AFRAME.registerComponent('gps-entity-place', {
-                    schema: {
-                        latitude: { type: 'number' },
-                        longitude: { type: 'number' }
-                    },
-                    init: function () {
-                        this.el.setAttribute('gps-entity-place', {
-                            latitude: this.data.latitude,
-                            longitude: this.data.longitude
-                        });
-                    }
-                });
             }
         });
     </script>
@@ -67,8 +48,8 @@
         </a-marker>
 
         <!-- Location-based approach: Red Objects with offset -->
-        <!-- Red Sphere at the phone's GPS coordinates with a small offset -->
-        <a-entity gps-entity-place>
+        <!-- Red Box at the phone's GPS coordinates with a small offset -->
+        <a-entity gps-entity-place="latitude: 0; longitude: 0;">
             <a-box color="red"></a-box>
         </a-entity>
         
