@@ -32,15 +32,15 @@
         <!-- Marker-based approach: Blue Objects -->
         <a-marker preset="hiro">
             <!-- Blue Sphere -->
-            <a-entity position="0 0 0">
+            <a-entity scale="0.2 0.2 0.2"position="0 0 0">
                 <a-sphere color="blue"></a-sphere>
             </a-entity>
             <!-- Blue Cube -->
-            <a-entity position="1 2 2">
+            <a-entity scale="0.2 0.2 0.2" position="0.14 0.25 0.25">
                 <a-box color="blue"></a-box>
             </a-entity>
             <!-- Blue Cube -->
-            <a-entity position="-2 1 -2.5">
+            <a-entity scale="0.2 0.2 0.2" position="-0.25 0.15 -0.25">
                 <a-box color="blue"></a-box>
             </a-entity>
             <!-- Add more blue objects as needed -->
@@ -48,17 +48,12 @@
 
         <!-- Location-based approach: Red Objects with offset -->
         <!-- Red Sphere at the phone's GPS coordinates with a small offset -->
-        <a-entity gps-entity-place>
-            <a-sphere color="red"></a-sphere>
-        </a-entity>
-
+        
         <a-entity gps-entity-place>
             <a-box color="red"></a-box>
         </a-entity>
 
-        <a-entity gps-entity-place>
-            <a-box color="red"></a-box>
-        </a-entity>
+        
         <!-- Add more red objects as needed -->
 
         <a-entity camera></a-entity>
