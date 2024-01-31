@@ -4,39 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AR.js with A-Frame</title>
-    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-    <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar-threex-location-only.js'></script>
-    <script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Check if the device supports geolocation
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    // Location-based approach: Set position for the red box
-                    const offset = 0.001; // Adjust this value as needed
-                    const latitudeWithOffset = position.coords.latitude + offset;
-                    const longitudeWithOffset = position.coords.longitude + offset;
-
-                    console.log("GPS Coordinates:", latitudeWithOffset, longitudeWithOffset);
-
-                    // Set the position for the location-based red box
-                    document.querySelector('#redBox').setAttribute('gps-new-entity-place', {
-                        latitude: latitudeWithOffset,
-                        longitude: longitudeWithOffset
-                    });
-                }, function(error) {
-                    console.error("Error getting GPS coordinates:", error);
-                });
-            } else {
-                console.error("Geolocation is not supported on this device.");
-            }
-        });
-    </script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
+    
 </head>
 <body>
-    <a-scene vr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true'>
-        <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
-        
+    <a-scene embedded arjs="sourceType: webcam;">
         <!-- Marker-based approach: Blue Objects -->
         <a-marker preset="hiro">
             <!-- Blue Sphere -->
@@ -54,8 +27,15 @@
             <!-- Add more blue objects as needed -->
         </a-marker>
 
-        <!-- Location-based approach: Red Box with offset -->
-        <a-entity id="redBox" material='color: red' geometry='primitive: box' scale="10 10 10"></a-entity>
+        <!-- Location-based approach: Red Objects with offset -->
+        <!-- Red Box at the phone's GPS coordinates with a small offset -->
+        <a-entity gps-entity-place="latitude: 0; longitude: 0;">
+            <a-box color="red"></a-box>
+        </a-entity>
+        
+        <!-- Add more red objects as needed -->
+
+        <a-entity camera></a-entity>
     </a-scene>
 </body>
 </html>
