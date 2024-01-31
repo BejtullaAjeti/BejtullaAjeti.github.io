@@ -12,8 +12,8 @@
         
         <!-- Three red objects distributed around the user's location -->
         <a-entity material='color: red' geometry='primitive: box' gps-new-entity-place="latitude: 0; longitude: 0" scale="10 10 10"></a-entity>
-        <a-entity material='color: red' geometry='primitive: sphere' gps-new-entity-place="latitude: 0.0002; longitude: 0.0002" scale="10 10 10" position="0 5 -5"></a-entity>
-        <a-entity material='color: red' geometry='primitive: cylinder' gps-new-entity-place="latitude: -0.0002; longitude: -0.0002" scale="10 10 10" position="5 0 5"></a-entity>
+        <a-entity material='color: red' geometry='primitive: box' gps-new-entity-place="latitude: 0.0002; longitude: 0.0002" scale="10 10 10" position="0 5 -5"></a-entity>
+        <a-entity material='color: red' geometry='primitive: box' gps-new-entity-place="latitude: -0.0002; longitude: -0.0002" scale="10 10 10" position="5 0 5"></a-entity>
     
         <a-marker preset="hiro">
             <a-entity position="0 0 0">
@@ -25,7 +25,7 @@
             </a-entity>
     
             <a-entity position="5 0 5">
-                <a-cylinder color="blue"></a-cylinder>
+                <a-box color="blue"></a-box>
             </a-entity>
         </a-marker>
     
