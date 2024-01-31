@@ -66,12 +66,16 @@
         function switchToMarkerScene() {
             document.getElementById("markerScene").style.display = "initial";
             document.getElementById("locationScene").style.display = "none";
+            document.getElementById("markerScene").setAttribute("arjs", "debugUIEnabled: false;");
+            document.getElementById("locationScene").setAttribute("arjs", "debugUIEnabled: true;");
         }
 
         // Function to switch to the location-based scene
         function switchToLocationScene() {
             document.getElementById("markerScene").style.display = "none";
             document.getElementById("locationScene").style.display = "initial";
+            document.getElementById("markerScene").setAttribute("arjs", "debugUIEnabled: true;");
+            document.getElementById("locationScene").setAttribute("arjs", "debugUIEnabled: false;");
         }
     </script>
 </body>
