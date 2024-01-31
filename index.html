@@ -6,7 +6,6 @@
     <title>AR.js with A-Frame</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
-    
 </head>
 <body>
     <a-scene embedded arjs="sourceType: webcam;">
@@ -27,12 +26,22 @@
             <!-- Add more blue objects as needed -->
         </a-marker>
 
-        <!-- Location-based approach: Red Objects with offset -->
-        <!-- Red Box at the phone's GPS coordinates with a small offset -->
-        <a-entity gps-entity-place="latitude: 0; longitude: 0;">
-            <a-box color="red"></a-box>
+        <!-- Location-based approach: Red Objects close to the user -->
+        <!-- Red Box close to the user -->
+        <a-entity gps-camera rotation-reader>
+            <a-box color="red" position="0 0 -5"></a-box>
         </a-entity>
-        
+
+        <!-- Red Sphere close to the user -->
+        <a-entity gps-camera rotation-reader>
+            <a-sphere color="red" position="0 0 -3"></a-sphere>
+        </a-entity>
+
+        <!-- Red Cylinder close to the user -->
+        <a-entity gps-camera rotation-reader>
+            <a-cylinder color="red" position="0 0 -1"></a-cylinder>
+        </a-entity>
+
         <!-- Add more red objects as needed -->
 
         <a-entity camera></a-entity>
