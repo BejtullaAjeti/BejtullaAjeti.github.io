@@ -11,19 +11,18 @@
             // Check if the device supports geolocation
             if ("geolocation" in navigator) {
                 navigator.geolocation.getCurrentPosition(function (position) {
-                    // Location-based approach: Red Objects with a small offset
+                    // Location-based approach: Set position for the red box
                     const offset = 0.001; // Adjust this value as needed
                     const latitudeWithOffset = position.coords.latitude + offset;
                     const longitudeWithOffset = position.coords.longitude + offset;
 
                     console.log("GPS Coordinates:", latitudeWithOffset, longitudeWithOffset);
 
-                    // Set the GPS coordinates for the location-based red objects
-                    document.querySelectorAll('a-entity[gps-entity-place]').forEach(function (entity) {
-                        entity.setAttribute('gps-entity-place', {
-                            latitude: latitudeWithOffset,
-                            longitude: longitudeWithOffset
-                        });
+                    // Set the position for the location-based red box
+                    document.querySelector('#redBox').setAttribute('position', {
+                        x: longitudeWithOffset,
+                        y: 0, // You can adjust the height if needed
+                        z: latitudeWithOffset
                     });
                 }, function(error) {
                     console.error("Error getting GPS coordinates:", error);
@@ -53,13 +52,8 @@
             <!-- Add more blue objects as needed -->
         </a-marker>
 
-        <!-- Location-based approach: Red Objects with offset -->
-        <!-- Red Box at the phone's GPS coordinates with a small offset -->
-        <a-entity gps-entity-place>
-            <a-box color="red"></a-box>
-        </a-entity>
-        
-        <!-- Add more red objects as needed -->
+        <!-- Location-based approach: Red Box with offset -->
+        <a-box id="redBox" color="red"></a-box>
 
         <a-entity camera></a-entity>
     </a-scene>
