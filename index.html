@@ -19,10 +19,9 @@
                     console.log("GPS Coordinates:", latitudeWithOffset, longitudeWithOffset);
 
                     // Set the position for the location-based red box
-                    document.querySelector('#redBox').setAttribute('position', {
-                        x: longitudeWithOffset,
-                        y: 0, // You can adjust the height if needed
-                        z: latitudeWithOffset
+                    document.querySelector('#redBox').setAttribute('gps-new-entity-place', {
+                        latitude: latitudeWithOffset,
+                        longitude: longitudeWithOffset
                     });
                 }, function(error) {
                     console.error("Error getting GPS coordinates:", error);
@@ -34,7 +33,9 @@
     </script>
 </head>
 <body>
-    <a-scene embedded arjs="sourceType: webcam;">
+    <a-scene vr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true'>
+        <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
+        
         <!-- Marker-based approach: Blue Objects -->
         <a-marker preset="hiro">
             <!-- Blue Sphere -->
@@ -53,9 +54,7 @@
         </a-marker>
 
         <!-- Location-based approach: Red Box with offset -->
-        <a-box id="redBox" color="red"></a-box>
-
-        <a-entity camera></a-entity>
+        <a-entity id="redBox" material='color: red' geometry='primitive: box' scale="10 10 10"></a-entity>
     </a-scene>
 </body>
 </html>
