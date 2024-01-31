@@ -4,78 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AR.js with A-Frame Lab</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
 </head>
 <body>
-    <!-- Marker-based AR Scene -->
-    <a-scene id="markerScene" embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-        <a-marker preset="hiro">
-            <!-- Blue Sphere -->
-            <a-entity scale="0.3 0.3 0.3" position="0 0 0">
-                <a-sphere color="blue"></a-sphere>
-            </a-entity>
-            <!-- Blue Cube -->
-            <a-entity scale="0.3 0.3 0.3" position="0.3 0.5 0.5">
-                <a-box color="blue"></a-box>
-            </a-entity>
-            <!-- Blue Cylinder -->
-            <a-entity scale="0.3 0.3 0.3" position="-0.5 0.3 -0.5">
-                <a-cylinder color="blue"></a-cylinder>
-            </a-entity>
-        </a-marker>
-        <a-entity camera></a-entity>
-    </a-scene>
-
-    <!-- Location-based AR Scene -->
-    <a-scene id="locationScene" embedded arjs="sourceType: webcam; debugUIEnabled: false;" style="display: none;">
-        <a-entity id="userLocation"></a-entity>
-        <!-- Red Sphere around the user -->
-        <a-entity scale="0.3 0.3 0.3" position="1 0 -3">
-            <a-sphere color="red"></a-sphere>
-        </a-entity>
-        <!-- Red Cube around the user -->
-        <a-entity scale="0.3 0.3 0.3" position="-2 0 -2">
-            <a-box color="red"></a-box>
-        </a-entity>
-        <!-- Red Cylinder around the user -->
-        <a-entity scale="0.3 0.3 0.3" position="0 -2 -4">
-            <a-cylinder color="red"></a-cylinder>
-        </a-entity>
-        <a-entity gps-camera rotation-reader></a-entity>
-
-        <script>
-            // Get the user's location
-            navigator.geolocation.getCurrentPosition(function (position) {
-                const userLatitude = position.coords.latitude;
-                const userLongitude = position.coords.longitude;
-                // Update the user's location for the red objects
-                document.querySelector("#userLocation").setAttribute("gps-entity-place", `latitude: ${userLatitude}; longitude: ${userLongitude};`);
-            });
-        </script>
-    </a-scene>
-
     <!-- UI Element for Scene Switching -->
     <div style="position: fixed; top: 10px; right: 10px; z-index: 999;">
-        <button onclick="switchToMarkerScene()">Marker Scene</button>
-        <button onclick="switchToLocationScene()">Location Scene</button>
+        <button onclick="loadMarkerScene()">Marker Scene</button>
+        <button onclick="loadLocationScene()">Location Scene</button>
     </div>
 
+    <!-- Container to load scenes dynamically -->
+    <div id="arSceneContainer"></div>
+
     <script>
-        // Function to switch to the marker-based scene
-        function switchToMarkerScene() {
-            document.getElementById("markerScene").style.display = "initial";
-            document.getElementById("locationScene").style.display = "none";
-            document.getElementById("markerScene").setAttribute("arjs", "debugUIEnabled: false;");
-            document.getElementById("locationScene").setAttribute("arjs", "debugUIEnabled: true;");
+        // Function to load the marker-based scene
+        function loadMarkerScene() {
+            loadScene("markerScene.html");
         }
 
-        // Function to switch to the location-based scene
-        function switchToLocationScene() {
-            document.getElementById("markerScene").style.display = "none";
-            document.getElementById("locationScene").style.display = "initial";
-            document.getElementById("markerScene").setAttribute("arjs", "debugUIEnabled: true;");
-            document.getElementById("locationScene").setAttribute("arjs", "debugUIEnabled: false;");
+        // Function to load the location-based scene
+        function loadLocationScene() {
+            loadScene("locationScene.html");
+        }
+
+        // Function to load scenes dynamically
+        function loadScene(sceneFile) {
+            const container = document.getElementById("arSceneContainer");
+            container.innerHTML = ""; // Clear previous scene
+
+            // Create an iframe to load the selected scene
+            const iframe = document.createElement("iframe");
+            iframe.src = sceneFile;
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            container.appendChild(iframe);
         }
     </script>
 </body>
