@@ -16,13 +16,33 @@
                     const latitudeWithOffset = position.coords.latitude + offset;
                     const longitudeWithOffset = position.coords.longitude + offset;
 
+                    // Set the GPS coordinates for the location-based red objects
                     document.querySelector('a-entity[gps-entity-place]').setAttribute('gps-entity-place', {
                         latitude: latitudeWithOffset,
                         longitude: longitudeWithOffset
                     });
+
+                    // Initialize the A-Frame scene after obtaining GPS coordinates
+                    initializeARScene();
                 });
             } else {
                 console.error("Geolocation is not supported on this device.");
+            }
+
+            function initializeARScene() {
+                // Initialize A-Frame scene
+                AFRAME.registerComponent('gps-entity-place', {
+                    schema: {
+                        latitude: { type: 'number' },
+                        longitude: { type: 'number' }
+                    },
+                    init: function () {
+                        this.el.setAttribute('gps-entity-place', {
+                            latitude: this.data.latitude,
+                            longitude: this.data.longitude
+                        });
+                    }
+                });
             }
         });
     </script>
@@ -32,15 +52,15 @@
         <!-- Marker-based approach: Blue Objects -->
         <a-marker preset="hiro">
             <!-- Blue Sphere -->
-            <a-entity scale="0.2 0.2 0.2"position="0 0 0">
+            <a-entity scale="0.3 0.3 0.3" position="0 0 0">
                 <a-sphere color="blue"></a-sphere>
             </a-entity>
             <!-- Blue Cube -->
-            <a-entity scale="0.2 0.2 0.2" position="0.14 0.25 0.25">
+            <a-entity scale="0.3 0.3 0.3" position="0.3 0.5 0.5">
                 <a-box color="blue"></a-box>
             </a-entity>
             <!-- Blue Cube -->
-            <a-entity scale="0.2 0.2 0.2" position="-0.25 0.15 -0.25">
+            <a-entity scale="0.3 0.3 0.3" position="-0.5 0.3 -0.5">
                 <a-box color="blue"></a-box>
             </a-entity>
             <!-- Add more blue objects as needed -->
@@ -48,11 +68,9 @@
 
         <!-- Location-based approach: Red Objects with offset -->
         <!-- Red Sphere at the phone's GPS coordinates with a small offset -->
-        
         <a-entity gps-entity-place>
             <a-box color="red"></a-box>
         </a-entity>
-
         
         <!-- Add more red objects as needed -->
 
