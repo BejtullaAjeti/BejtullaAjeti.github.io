@@ -11,15 +11,10 @@
             // Check if the device supports geolocation
             if ("geolocation" in navigator) {
                 navigator.geolocation.getCurrentPosition(function (position) {
-                    // Location-based approach: Red Objects with a small offset
-                    const offset = 0.001; // Adjust this value as needed
-                    const latitudeWithOffset = position.coords.latitude + offset;
-                    const longitudeWithOffset = position.coords.longitude + offset;
-
-                    // Set the GPS coordinates for the location-based red objects
+                    // Location-based approach: Red Objects
                     document.querySelector('a-entity[gps-entity-place]').setAttribute('gps-entity-place', {
-                        latitude: latitudeWithOffset,
-                        longitude: longitudeWithOffset
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
                     });
                 });
             } else {
@@ -29,30 +24,29 @@
     </script>
 </head>
 <body>
-    <a-scene embedded arjs="sourceType: webcam;">
-        <!-- Marker-based approach: Blue Objects -->
-        <a-marker preset="hiro">
-            <!-- Blue Sphere -->
-            <a-entity scale="0.3 0.3 0.3" position="0 0 0">
-                <a-sphere color="blue"></a-sphere>
-            </a-entity>
-            <!-- Blue Cube -->
-            <a-entity scale="0.3 0.3 0.3" position="0.3 0.5 0.5">
-                <a-box color="blue"></a-box>
-            </a-entity>
-            <!-- Blue Cube -->
-            <a-entity scale="0.3 0.3 0.3" position="-0.5 0.3 -0.5">
-                <a-box color="blue"></a-box>
-            </a-entity>
-            <!-- Add more blue objects as needed -->
-        </a-marker>
+        <a-scene embedded arjs="sourceType: webcam;">
+            <!-- Marker-based approach: Blue Objects -->
+            <a-marker preset="hiro">
+                <!-- Blue Sphere -->
+                <a-entity scale="0.3 0.3 0.3"position="0 0 0">
+                    <a-sphere color="blue"></a-sphere>
+                </a-entity>
+                <!-- Blue Cube -->
+                <a-entity scale="0.3 0.3 0.3" position="0.3 0.5 0.5">
+                    <a-box color="blue"></a-box>
+                </a-entity>
+                <!-- Blue Cube -->
+                <a-entity scale="0.3 0.3 0.3" position="-0.5 0.3 -0.5">
+                    <a-box color="blue"></a-box>
+                </a-entity>
+                <!-- Add more blue objects as needed -->
+            </a-marker>
 
-        <!-- Location-based approach: Red Objects with offset -->
-        <!-- Red Box at the phone's GPS coordinates with a small offset -->
-        <a-entity gps-entity-place="latitude: 0; longitude: 0;">
-            <a-box color="red"></a-box>
+        <!-- Location-based approach: Red Objects -->
+        <!-- Red Sphere at the phone's GPS coordinates -->
+        <a-entity gps-entity-place>
+            <a-sphere color="red"></a-sphere>
         </a-entity>
-        
         <!-- Add more red objects as needed -->
 
         <a-entity camera></a-entity>
