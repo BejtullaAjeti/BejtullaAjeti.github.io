@@ -24,23 +24,19 @@
     </script>
 </head>
 <body>
-        <a-scene embedded arjs="sourceType: webcam;">
-            <!-- Marker-based approach: Blue Objects -->
-            <a-marker preset="hiro">
-                <!-- Blue Sphere -->
-                <a-entity scale="0.3 0.3 0.3"position="0 0 0">
-                    <a-sphere color="blue"></a-sphere>
-                </a-entity>
-                <!-- Blue Cube -->
-                <a-entity scale="0.3 0.3 0.3" position="0.3 0.5 0.5">
-                    <a-box color="blue"></a-box>
-                </a-entity>
-                <!-- Blue Cube -->
-                <a-entity scale="0.3 0.3 0.3" position="-0.5 0.3 -0.5">
-                    <a-box color="blue"></a-box>
-                </a-entity>
-                <!-- Add more blue objects as needed -->
-            </a-marker>
+    <a-scene embedded arjs="sourceType: webcam;">
+        <!-- Marker-based approach: Blue Objects -->
+        <a-marker preset="hiro">
+            <!-- Blue Sphere -->
+            <a-entity position="0 0 0">
+                <a-sphere color="blue"></a-sphere>
+            </a-entity>
+            <!-- Blue Cube -->
+            <a-entity position="0 2 0">
+                <a-box color="blue"></a-box>
+            </a-entity>
+            <!-- Add more blue objects as needed -->
+        </a-marker>
 
         <!-- Location-based approach: Red Objects -->
         <!-- Red Sphere at the phone's GPS coordinates -->
