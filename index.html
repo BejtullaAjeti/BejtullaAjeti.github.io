@@ -27,6 +27,7 @@
         }
 
         // Function to load scenes dynamically
+        <!-- Function to load scenes dynamically -->
         function loadScene(sceneFile) {
             const container = document.getElementById("arSceneContainer");
             container.innerHTML = ""; // Clear previous scene
@@ -35,7 +36,7 @@
             const iframe = document.createElement("iframe");
             iframe.src = sceneFile;
             iframe.style.width = "100%";
-            iframe.style.height = "100%";
+            iframe.style.height = "90vh";  // Set a fixed height (90% of the viewport height)
             container.appendChild(iframe);
         }
     </script>
