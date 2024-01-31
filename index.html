@@ -9,7 +9,7 @@
 </head>
 <body>
     <a-scene embedded arjs="sourceType: webcam;">
-        <!-- Marker-based approach: Blue Objects -->
+        <!-- Marker-based approach: Blue Objects on the marker -->
         <a-marker preset="hiro">
             <!-- Blue Sphere -->
             <a-entity scale="0.3 0.3 0.3" position="0 0 0">
@@ -26,27 +26,42 @@
             <!-- Add more blue objects as needed -->
         </a-marker>
 
-        <!-- Location-based approach: Red Objects close to the user's GPS location -->
-        <a-entity gps-entity-place="latitude: 0; longitude: 0;">
-            <!-- Red Box -->
-            <a-entity position="1 0 -3">
-                <a-box color="red"></a-box>
-            </a-entity>
+        <!-- Location-based approach: Red Objects near user's location (read only once) -->
+        <a-entity id="userLocation" gps-entity-place="latitude: 0; longitude: 0;"></a-entity>
 
-            <!-- Red Sphere -->
-            <a-entity position="-2 0 -2">
-                <a-sphere color="red"></a-sphere>
-            </a-entity>
-
-            <!-- Red Cylinder -->
-            <a-entity position="0 -2 -4">
-                <a-cylinder color="red"></a-cylinder>
-            </a-entity>
-
-            <!-- Add more red objects as needed -->
+        <!-- Red Box near the user's location -->
+        <a-entity position="1 0 -3" gps-entity-place="latitude: 0; longitude: 0;">
+            <a-box color="red"></a-box>
         </a-entity>
+
+        <!-- Red Sphere near the user's location -->
+        <a-entity position="-2 0 -2" gps-entity-place="latitude: 0; longitude: 0;">
+            <a-sphere color="red"></a-sphere>
+        </a-entity>
+
+        <!-- Red Cylinder near the user's location -->
+        <a-entity position="0 -2 -4" gps-entity-place="latitude: 0; longitude: 0;">
+            <a-cylinder color="red"></a-cylinder>
+        </a-entity>
+
+        <!-- Add more red objects as needed -->
 
         <a-entity gps-camera rotation-reader></a-entity>
     </a-scene>
+
+    <script>
+        // Get the user's location only once
+        document.querySelector("#userLocation").addEventListener("loaded", function () {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                const userLatitude = position.coords.latitude;
+                const userLongitude = position.coords.longitude;
+
+                // Update the user's location for the red objects
+                document.querySelectorAll("[gps-entity-place]").forEach(function (entity) {
+                    entity.setAttribute("gps-entity-place", `latitude: ${userLatitude}; longitude: ${userLongitude};`);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
