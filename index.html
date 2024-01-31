@@ -19,9 +19,11 @@
                     console.log("GPS Coordinates:", latitudeWithOffset, longitudeWithOffset);
 
                     // Set the GPS coordinates for the location-based red objects
-                    document.querySelector('a-entity[gps-entity-place]').setAttribute('gps-entity-place', {
-                        latitude: latitudeWithOffset,
-                        longitude: longitudeWithOffset
+                    document.querySelectorAll('a-entity[gps-entity-place]').forEach(function (entity) {
+                        entity.setAttribute('gps-entity-place', {
+                            latitude: latitudeWithOffset,
+                            longitude: longitudeWithOffset
+                        });
                     });
                 }, function(error) {
                     console.error("Error getting GPS coordinates:", error);
@@ -53,7 +55,7 @@
 
         <!-- Location-based approach: Red Objects with offset -->
         <!-- Red Box at the phone's GPS coordinates with a small offset -->
-        <a-entity gps-entity-place="latitude: 0; longitude: 0;">
+        <a-entity gps-entity-place>
             <a-box color="red"></a-box>
         </a-entity>
         
