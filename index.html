@@ -26,24 +26,38 @@
             <!-- Add more blue objects as needed -->
         </a-marker>
 
-        <!-- Location-based approach: Red Objects with Device GPS coordinates -->
-        <a-entity gps-entity-place="latitude: 0; longitude: 0;">
-            <!-- Red Sphere -->
-            <a-entity scale="0.3 0.3 0.3">
-                <a-sphere color="red"></a-sphere>
-            </a-entity>
-            <!-- Red Cube -->
-            <a-entity scale="0.3 0.3 0.3" position="0.3 0.5 0.5">
-                <a-box color="red"></a-box>
-            </a-entity>
-            <!-- Red Cylinder -->
-            <a-entity scale="0.3 0.3 0.3" position="-0.5 0.3 -0.5">
-                <a-cylinder color="red"></a-cylinder>
-            </a-entity>
-            <!-- Add more red objects as needed -->
+        <!-- Location-based approach: Red Objects around the user -->
+        <a-entity id="userLocation"></a-entity>
+
+        <!-- Red Sphere around the user -->
+        <a-entity scale="0.3 0.3 0.3" position="1 0 -3">
+            <a-sphere color="red"></a-sphere>
         </a-entity>
 
-        <a-entity camera></a-entity>
+        <!-- Red Cube around the user -->
+        <a-entity scale="0.3 0.3 0.3" position="-2 0 -2">
+            <a-box color="red"></a-box>
+        </a-entity>
+
+        <!-- Red Cylinder around the user -->
+        <a-entity scale="0.3 0.3 0.3" position="0 -2 -4">
+            <a-cylinder color="red"></a-cylinder>
+        </a-entity>
+
+        <!-- Add more red objects as needed -->
+
+        <a-entity gps-camera rotation-reader></a-entity>
+
+        <script>
+            // Get the user's location
+            navigator.geolocation.getCurrentPosition(function (position) {
+                const userLatitude = position.coords.latitude;
+                const userLongitude = position.coords.longitude;
+
+                // Update the user's location for the red objects
+                document.querySelector("#userLocation").setAttribute("gps-entity-place", `latitude: ${userLatitude}; longitude: ${userLongitude};`);
+            });
+        </script>
     </a-scene>
 </body>
 </html>
