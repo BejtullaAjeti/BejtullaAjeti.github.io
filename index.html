@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR.js with A-Frame</title>
+    <title>AR.js with A-Frame Lab</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
 </head>
 <body>
-    <a-scene embedded arjs="sourceType: webcam;">
-        <!-- Marker-based approach: Blue Objects on the marker -->
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+        <!-- Marker-based approach: Blue Objects -->
         <a-marker preset="hiro">
             <!-- Blue Sphere -->
             <a-entity scale="0.3 0.3 0.3" position="0 0 0">
@@ -19,49 +19,30 @@
             <a-entity scale="0.3 0.3 0.3" position="0.3 0.5 0.5">
                 <a-box color="blue"></a-box>
             </a-entity>
-            <!-- Blue Cube -->
+            <!-- Blue Cylinder -->
             <a-entity scale="0.3 0.3 0.3" position="-0.5 0.3 -0.5">
-                <a-box color="blue"></a-box>
+                <a-cylinder color="blue"></a-cylinder>
             </a-entity>
             <!-- Add more blue objects as needed -->
         </a-marker>
 
-        <!-- Location-based approach: Red Objects near user's location (read only once) -->
-        <a-entity id="userLocation" gps-entity-place="latitude: 0; longitude: 0;"></a-entity>
-
-        <!-- Red Box near the user's location -->
-        <a-entity static-body position="1 0 -3">
-            <a-box color="red"></a-box>
-        </a-entity>
-
-        <!-- Red Sphere near the user's location -->
-        <a-entity static-body position="-2 0 -2">
-            <a-sphere color="red"></a-sphere>
-        </a-entity>
-
-        <!-- Red Cylinder near the user's location -->
-        <a-entity static-body position="0 -2 -4">
-            <a-cylinder color="red"></a-cylinder>
-        </a-entity>
+        <!-- Location-based approach: Red Objects with Device GPS coordinates -->
+        <a-entity id="userLocation"></a-entity>
 
         <!-- Add more red objects as needed -->
 
-        <a-entity gps-camera rotation-reader></a-entity>
-    </a-scene>
+        <a-entity camera></a-entity>
 
-    <script>
-        // Get the user's location only once
-        document.querySelector("#userLocation").addEventListener("loaded", function () {
+        <script>
+            // Get the user's location
             navigator.geolocation.getCurrentPosition(function (position) {
                 const userLatitude = position.coords.latitude;
                 const userLongitude = position.coords.longitude;
 
                 // Update the user's location for the red objects
-                document.querySelectorAll("[static-body]").forEach(function (entity) {
-                    entity.setAttribute("position", `${userLatitude} 0 ${userLongitude}`);
-                });
+                document.querySelector("#userLocation").setAttribute("gps-entity-place", `latitude: ${userLatitude}; longitude: ${userLongitude};`);
             });
-        });
-    </script>
+        </script>
+    </a-scene>
 </body>
 </html>
