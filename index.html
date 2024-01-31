@@ -12,7 +12,7 @@
             if ("geolocation" in navigator) {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     // Location-based approach: Red Objects with a small offset
-                    const offset = 0.001; // Adjust this value as needed
+                    const offset = 0.005; // Adjust this value as needed
                     const latitudeWithOffset = position.coords.latitude + offset;
                     const longitudeWithOffset = position.coords.longitude + offset;
 
@@ -39,6 +39,10 @@
             <a-entity position="0 0.1 0">
                 <a-box color="blue"></a-box>
             </a-entity>
+            <!-- Blue Cube -->
+            <a-entity position="0 0.3 0.5">
+                <a-box color="blue"></a-box>
+            </a-entity>
             <!-- Add more blue objects as needed -->
         </a-marker>
 
@@ -46,6 +50,14 @@
         <!-- Red Sphere at the phone's GPS coordinates with a small offset -->
         <a-entity gps-entity-place>
             <a-sphere color="red"></a-sphere>
+        </a-entity>
+
+        <a-entity gps-entity-place>
+            <a-box color="red"></a-box>
+        </a-entity>
+
+        <a-entity gps-entity-place>
+            <a-box color="red"></a-box>
         </a-entity>
         <!-- Add more red objects as needed -->
 
