@@ -8,8 +8,8 @@
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
 </head>
 <body>
+    <!-- Marker-based AR Scene -->
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-        <!-- Marker-based approach: Blue Objects -->
         <a-marker preset="hiro">
             <!-- Blue Sphere -->
             <a-entity scale="0.3 0.3 0.3" position="0 0 0">
@@ -23,29 +23,25 @@
             <a-entity scale="0.3 0.3 0.3" position="-0.5 0.3 -0.5">
                 <a-cylinder color="blue"></a-cylinder>
             </a-entity>
-            <!-- Add more blue objects as needed -->
         </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
 
-        <!-- Location-based approach: Red Objects around the user -->
+    <!-- Location-based AR Scene -->
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
         <a-entity id="userLocation"></a-entity>
-
         <!-- Red Sphere around the user -->
         <a-entity scale="0.3 0.3 0.3" position="1 0 -3">
             <a-sphere color="red"></a-sphere>
         </a-entity>
-
         <!-- Red Cube around the user -->
         <a-entity scale="0.3 0.3 0.3" position="-2 0 -2">
             <a-box color="red"></a-box>
         </a-entity>
-
         <!-- Red Cylinder around the user -->
         <a-entity scale="0.3 0.3 0.3" position="0 -2 -4">
             <a-cylinder color="red"></a-cylinder>
         </a-entity>
-
-        <!-- Add more red objects as needed -->
-
         <a-entity gps-camera rotation-reader></a-entity>
 
         <script>
@@ -53,9 +49,7 @@
             navigator.geolocation.getCurrentPosition(function (position) {
                 const userLatitude = position.coords.latitude;
                 const userLongitude = position.coords.longitude;
-
                 // Update the user's location for the red objects
-                document.querySelector("#userLocation").setAttribute("gps-entity-place", `latitude: ${userLatitude}; longitude: ${userLongitude};`);
             });
         </script>
     </a-scene>
